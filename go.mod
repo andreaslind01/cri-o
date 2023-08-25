@@ -19,15 +19,15 @@ require (
 	github.com/containerd/typeurl v1.0.3-0.20220422153119-7f6e6d160d67
 	github.com/containernetworking/cni v1.1.2
 	github.com/containernetworking/plugins v1.3.0
-	github.com/containers/buildah v1.31.0
-	github.com/containers/common v0.55.1
+	github.com/containers/buildah v1.31.3
+	github.com/containers/common v0.55.4
 	github.com/containers/conmon v2.0.20+incompatible
 	github.com/containers/conmon-rs v0.5.1
-	github.com/containers/image/v5 v5.26.1
+	github.com/containers/image/v5 v5.26.2
 	github.com/containers/kubensmnt v1.2.0
 	github.com/containers/ocicrypt v1.1.7
 	github.com/containers/podman/v4 v4.5.2-0.20230706090613-813f1b53bf39
-	github.com/containers/storage v1.48.0
+	github.com/containers/storage v1.48.1
 	github.com/coreos/go-systemd/v22 v22.5.0
 	github.com/cpuguy83/go-md2man v1.0.10
 	github.com/creack/pty v1.1.18
