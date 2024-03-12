@@ -1,4 +1,4 @@
-//go:build !windows
+//go:build windows
 
 /*
    Copyright The containerd Authors.
@@ -16,19 +16,15 @@
    limitations under the License.
 */
 
-package platforms
+package net
 
 import (
-	specs "github.com/opencontainers/image-spec/specs-go/v1"
+	"errors"
+
+	sys "golang.org/x/sys/windows"
 )
 
-// NewMatcher returns the default Matcher for containerd
-func newDefaultMatcher(platform specs.Platform) Matcher {
-	return &matcher{
-		Platform: Normalize(platform),
-	}
-}
-
-func GetWindowsOsVersion() string {
-	return ""
+func newSocketPairCLOEXEC() ([2]sys.Handle, error) {
+	// when implementing do use WSA_FLAG_NO_HANDLE_INHERIT to avoid leaking FDs
+	return [2]sys.Handle{sys.InvalidHandle, sys.InvalidHandle}, errors.New("newSocketPairCLOEXEC unimplemented for windows")
 }

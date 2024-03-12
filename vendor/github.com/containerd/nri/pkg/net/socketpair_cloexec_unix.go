@@ -1,4 +1,4 @@
-//go:build !windows
+//go:build !linux && !windows
 
 /*
    Copyright The containerd Authors.
@@ -16,19 +16,23 @@
    limitations under the License.
 */
 
-package platforms
+package net
 
 import (
-	specs "github.com/opencontainers/image-spec/specs-go/v1"
+	"syscall"
+
+	"golang.org/x/sys/unix"
 )
 
-// NewMatcher returns the default Matcher for containerd
-func newDefaultMatcher(platform specs.Platform) Matcher {
-	return &matcher{
-		Platform: Normalize(platform),
+func newSocketPairCLOEXEC() ([2]int, error) {
+	syscall.ForkLock.RLock()
+	defer syscall.ForkLock.RUnlock()
+	fds, err := unix.Socketpair(unix.AF_UNIX, unix.SOCK_STREAM, 0)
+	if err != nil {
+		return fds, err
 	}
-}
+	unix.CloseOnExec(fds[0])
+	unix.CloseOnExec(fds[1])
 
-func GetWindowsOsVersion() string {
-	return ""
+	return fds, err
 }
